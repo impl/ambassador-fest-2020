@@ -2,10 +2,10 @@
 
 . ./scripts/library.sh
 
-cat manifests/07-test-ambassador.yaml
+cat manifests/08-test-ambassador.yaml
 pause
 
-kubectl apply -n customers -f ./manifests/07-test-ambassador.yaml
+kubectl apply -n customers -f ./manifests/08-test-ambassador.yaml
 kubectl wait --timeout=180s -n customers --for=condition=ready ksvc/helloworld-go
 kubectl get ksvc -n customers helloworld-go \
   --output=custom-columns=NAME:.metadata.name,URL:.status.url

@@ -1,0 +1,7 @@
+#!/bin/bash
+set -euo pipefail
+
+. ./scripts/library.sh
+
+kubectl create -f ./manifests/02-configure-cni/0-tigera-operator.yaml
+kubectl create -f ./manifests/02-configure-cni/1-custom-resources.yaml

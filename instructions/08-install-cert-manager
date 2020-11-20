@@ -1,6 +1,0 @@
-#!/bin/bash
-set -euo pipefail
-
-. ./scripts/library.sh
-
-kubectl apply --validate=false -f ./manifests/08-install-cert-manager/0-cert-manager.yaml

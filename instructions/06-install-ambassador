@@ -1,0 +1,19 @@
+#!/bin/bash
+set -euo pipefail
+
+. ./scripts/library.sh
+
+kubectl apply -f ./manifests/06-install-ambassador/0-ambassador-operator-crds.yaml
+kubectl apply -n ambassador -f ./manifests/06-install-ambassador/1-ambassador-operator.yaml
+
+cat manifests/06-install-ambassador/2-ambassador-installation.yaml
+pause
+
+kubectl apply -n ambassador -f ./manifests/06-install-ambassador/2-ambassador-installation.yaml
+kubectl wait --timeout=180s -n ambassador --for=condition=deployed ambassadorinstallations/ambassador
+pause
+
+kubectl patch -n knative-serving \
+  configmap/config-network \
+  --type=merge \
+  --patch='{"data":{"ingress.class":"ambassador.ingress.networking.knative.dev"}}'

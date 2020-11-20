@@ -3,7 +3,7 @@ set -euo pipefail
 
 . ./scripts/library.sh
 
-kubectl run i-03-test-default-dmesg \
+kubectl run i-04-test-default-dmesg \
   --rm --attach \
   --restart=Never \
   --image=alpine:latest \
@@ -11,7 +11,7 @@ kubectl run i-03-test-default-dmesg \
   sh -c 'dmesg' || true
 pause
 
-kubectl run i-03-test-gvisor-dmesg \
+kubectl run i-04-test-gvisor-dmesg \
   --rm --attach \
   --restart=Never \
   --image=alpine:latest \
@@ -20,7 +20,7 @@ kubectl run i-03-test-gvisor-dmesg \
   sh -c 'dmesg' || true
 pause
 
-kubectl run i-03-test-default-acpi \
+kubectl run i-04-test-default-acpi \
   --rm --attach \
   --restart=Never \
   --image=alpine:latest \
@@ -28,7 +28,7 @@ kubectl run i-03-test-default-acpi \
   sh -c 'cat /sys/devices/platform/thinkpad_acpi/leds/tpacpi::thinklight/brightness' || true
 pause
 
-kubectl run i-03-test-gvisor-acpi \
+kubectl run i-04-test-gvisor-acpi \
   --rm --attach \
   --restart=Never \
   --image=alpine:latest \

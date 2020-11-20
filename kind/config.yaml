@@ -4,6 +4,9 @@ containerdConfigPatches:
 - |-
   [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runsc]
     runtime_type = "io.containerd.runsc.v1"
+networking:
+  disableDefaultCNI: true
+  podSubnet: 192.168.0.0/16
 nodes:
 - role: control-plane
   kubeadmConfigPatches:

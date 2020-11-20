@@ -1,9 +1,0 @@
-#!/bin/bash
-set -euo pipefail
-
-. ./scripts/library.sh
-
-cat ./manifests/02-set-up-gvisor-runtime.yaml
-pause
-
-kubectl apply -f ./manifests/02-set-up-gvisor-runtime.yaml

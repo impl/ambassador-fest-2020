@@ -12,10 +12,10 @@ docker push nfontes/whoa:latest
 popd
 pause
 
-cat ./manifests/10-test-gvisor-service.yaml
+cat ./manifests/11-test-gvisor-service.yaml
 pause
 
-kubectl apply -n customers -f ./manifests/10-test-gvisor-service.yaml
+kubectl apply -n customers -f ./manifests/11-test-gvisor-service.yaml
 kubectl wait --timeout=180s -n customers --for=condition=ready ksvc/whoa
 kubectl get ksvc -n customers whoa \
   --output=custom-columns=NAME:.metadata.name,URL:.status.url

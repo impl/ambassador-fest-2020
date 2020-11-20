@@ -1,0 +1,11 @@
+#!/bin/bash
+set -euo pipefail
+
+. ./scripts/library.sh
+
+cat ./manifests/12-network-policy.yaml
+pause
+
+kubectl label namespace --overwrite knative-serving upstream-gateway=true
+kubectl label namespace --overwrite ambassador upstream-gateway=true
+kubectl apply -n customers -f ./manifests/12-network-policy.yaml
