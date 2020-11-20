@@ -3,5 +3,10 @@ set -euo pipefail
 
 . ./scripts/library.sh
 
-kubectl create -f ./manifests/02-configure-cni/0-tigera-operator.yaml
-kubectl create -f ./manifests/02-configure-cni/1-custom-resources.yaml
+kubectl apply -f ./manifests/02-configure-cni/0-tigera-operator.yaml
+kubectl apply -f ./manifests/02-configure-cni/1-custom-resources.yaml
+
+while [[ "$( kubectl get pod -n calico-system --output json | jq '.items | length' )" -lt 3 ]]; do
+  :
+done
+kubectl wait --timeout=120s -n calico-system --for=condition=ready pod --all
