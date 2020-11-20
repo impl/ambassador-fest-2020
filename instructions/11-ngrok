@@ -1,0 +1,6 @@
+#!/bin/bash
+set -euo pipefail
+
+. ./scripts/library.sh
+
+ngrok http --host-header=whoa.customers.127.0.0.1.xip.io 80

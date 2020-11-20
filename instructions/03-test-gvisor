@@ -1,0 +1,37 @@
+#!/bin/bash
+set -euo pipefail
+
+. ./scripts/library.sh
+
+kubectl run i-03-test-default-dmesg \
+  --rm --attach \
+  --restart=Never \
+  --image=alpine:latest \
+  -- \
+  sh -c 'dmesg' || true
+pause
+
+kubectl run i-03-test-gvisor-dmesg \
+  --rm --attach \
+  --restart=Never \
+  --image=alpine:latest \
+  --overrides='{"spec":{"runtimeClassName":"runsc"}}' \
+  -- \
+  sh -c 'dmesg' || true
+pause
+
+kubectl run i-03-test-default-acpi \
+  --rm --attach \
+  --restart=Never \
+  --image=alpine:latest \
+  -- \
+  sh -c 'cat /sys/devices/platform/thinkpad_acpi/leds/tpacpi::thinklight/brightness' || true
+pause
+
+kubectl run i-03-test-gvisor-acpi \
+  --rm --attach \
+  --restart=Never \
+  --image=alpine:latest \
+  --overrides='{"spec":{"runtimeClassName":"runsc"}}' \
+  -- \
+  sh -c 'cat /sys/devices/platform/thinkpad_acpi/leds/tpacpi::thinklight/brightness' || true

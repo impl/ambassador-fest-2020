@@ -1,0 +1,12 @@
+#!/bin/bash
+set -euo pipefail
+
+. ./scripts/library.sh
+
+export IMG=enforcer:latest
+
+pushd ./apps/enforcer
+
+make docker-build
+kind load docker-image $IMG
+make deploy

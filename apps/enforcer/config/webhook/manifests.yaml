@@ -1,0 +1,30 @@
+
+---
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: MutatingWebhookConfiguration
+metadata:
+  creationTimestamp: null
+  name: mutating-webhook-configuration
+webhooks:
+- clientConfig:
+    caBundle: Cg==
+    service:
+      name: webhook-service
+      namespace: system
+      path: /mutate-pod
+  failurePolicy: Fail
+  sideEffects: None
+  reinvocationPolicy: IfNeeded
+  namespaceSelector:
+    matchLabels:
+      protected: "true"
+  name: mutate-core-v1-pod.ambassador-fest.talks.cynigram.com
+  rules:
+  - apiGroups: [""]
+    apiVersions:
+    - v1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - pods

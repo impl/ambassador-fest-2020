@@ -1,0 +1,12 @@
+#!/bin/bash
+set -euo pipefail
+
+. ./scripts/library.sh
+
+pushd kind
+
+bat Dockerfile
+pause
+
+docker build -t $KIND_IMAGE .
+docker push $KIND_IMAGE

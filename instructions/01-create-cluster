@@ -1,0 +1,9 @@
+#!/bin/bash
+set -euo pipefail
+
+. ./scripts/library.sh
+
+cat kind/config.yaml
+pause
+
+kind get clusters 2>/dev/null | grep -Fx $KIND_CLUSTER_NAME >/dev/null || kind create cluster --image=$KIND_IMAGE --config=kind/config.yaml

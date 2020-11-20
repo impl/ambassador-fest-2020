@@ -1,0 +1,7 @@
+domain: ambassador-fest.talks.cynigram.com
+repo: cynigram.com/talks/ambassador-fest/apps/enforcer
+resources:
+- group: coretest
+  kind: Pod
+  version: v1
+version: "2"

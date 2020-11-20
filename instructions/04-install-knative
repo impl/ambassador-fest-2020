@@ -1,0 +1,13 @@
+#!/bin/bash
+set -euo pipefail
+
+. ./scripts/library.sh
+
+kubectl apply -f ./manifests/04-install-knative/0-serving-crds.yaml
+kubectl apply -f ./manifests/04-install-knative/1-serving-core.yaml
+pause
+
+kubectl patch -n knative-serving \
+  configmap/config-domain \
+  --type=merge \
+  --patch='{"data":{"127.0.0.1.xip.io":""}}'
